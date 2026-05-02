@@ -1,5 +1,5 @@
 const WHATSAPP_NUMBER = "00962780959008";
-const WARRANTY_OPTIONS = ["3 Months", "6 Months", "1 Year", "2 Years"];
+const WARRANTY_OPTIONS = ["No Warranty", "0 Months", "3 Months", "6 Months", "1 Year", "2 Years"];
 
 const productContainer = document.getElementById("productContainer");
 const filterButtons = document.querySelectorAll(".filter-btn");
@@ -14,7 +14,61 @@ function getCategoryLabel(category) {
   return category === "os" ? "OS" : category;
 }
 
+function getMonths(warranty) {
+  if (warranty === "No Warranty" || warranty === "0 Months") {
+    return 0;
+  }
+  const value = parseInt(warranty, 10);
+  if (Number.isNaN(value)) {
+    return 0;
+  }
+  if (warranty.includes("Year")) {
+    return value * 12;
+  }
+  return value;
+}
+
+function getCategoryBasePrice(product, version) {
+  const name = product.name.toLowerCase();
+  const versionLabel = String(version).toLowerCase();
+
+  if (name.includes("windows")) {
+    return versionLabel.includes("server")
+      ? pricingRules.windows.serverBase
+      : pricingRules.windows.desktopBase;
+  }
+
+  if (name.includes("macos")) {
+    return pricingRules.macos.base;
+  }
+
+  if (name.includes("linux")) {
+    if (versionLabel.includes("server")) {
+      return pricingRules.linux.serverBase;
+    }
+    if (versionLabel.includes("kali")) {
+      return pricingRules.linux.kaliBase;
+    }
+    return pricingRules.linux.distroBase;
+  }
+
+  if (
+    product.category === "adobe" ||
+    product.category === "autodesk" ||
+    product.category === "office" ||
+    product.category === "sketchup"
+  ) {
+    return pricingRules.general.base;
+  }
+
+  return product.basePrice;
+}
+
 function getCalculatedPrice(product, version, warranty) {
+  const warrantyMonths = getMonths(warranty);
+  if (warrantyMonths === 0) {
+    return getCategoryBasePrice(product, version);
+  }
   return window.PricingEngine.getCalculatedPrice(product, version, warranty, pricingRules);
 }
 
