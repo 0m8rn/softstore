@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoftStore</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">SoftStore</div>
+      <nav class="nav" aria-label="Product categories">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="os">OS</button>
+        <button class="filter-btn" data-category="adobe">Adobe</button>
+        <button class="filter-btn" data-category="autodesk">Autodesk</button>
+        <button class="filter-btn" data-category="office">Office</button>
+        <button class="filter-btn" data-category="sketchup">SketchUp</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Premium Software Licenses</h1>
+        <p>Fast activation, trusted sellers, and pricing built for both individuals and businesses.</p>
+        <div class="hero-meta">
+          <span>⚡ Instant Delivery</span>
+          <span>🛡️ Warranty Included</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="products-section">
+      <div class="products" id="productContainer"></div>
+    </section>
+  </main>
+
+  <script src="data/pricingRules.js"></script>
+  <script src="data/products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
