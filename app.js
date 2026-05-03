@@ -103,14 +103,9 @@ function createProductCard(product, index) {
   card.className = "card card-enter";
   card.style.setProperty("--stagger", `${index * 45}ms`);
 
-  const imageBlock = product.image
-    ? `<img src="${product.image}" class="product-img" loading="lazy" alt="${product.name}">`
-    : "";
-
   const popularBadge = product.popular ? `<span class="badge">🔥 Most Popular</span>` : "";
 
   card.innerHTML = `
-    ${imageBlock}
     ${popularBadge}
     <h3 class="product-name">${product.name}</h3>
     <p class="product-category">${getCategoryLabel(product.category)}</p>
@@ -131,18 +126,26 @@ function createProductCard(product, index) {
     <button class="buy-btn" type="button">Buy via WhatsApp</button>
   `;
 
+  if (product.image) {
+    const img = document.createElement("img");
+    img.src = product.image;
+    img.alt = product.name;
+    img.className = "product-img";
+    img.loading = "lazy";
+    img.addEventListener("load", () => {
+      img.style.opacity = "1";
+    });
+    img.addEventListener("error", () => {
+      img.style.display = "none";
+    });
+    card.insertBefore(img, card.firstChild);
+  }
+
   const versionSelect = card.querySelector(".version-select");
   const warrantySelect = card.querySelector(".warranty-select");
   const oldPriceElement = card.querySelector(".old-price");
   const newPriceElement = card.querySelector(".new-price");
   const buyButton = card.querySelector(".buy-btn");
-  const productImage = card.querySelector(".product-img");
-
-  if (productImage) {
-    productImage.addEventListener("error", () => {
-      productImage.style.display = "none";
-    });
-  }
 
   function updatePriceUI() {
     const newPrice = Math.round(getCalculatedPrice(product, versionSelect.value, warrantySelect.value));
@@ -271,7 +274,7 @@ function addQuickWhatsAppButton() {
   const quickButton = document.createElement("button");
   quickButton.type = "button";
   quickButton.className = "quick-whatsapp-btn";
-  quickButton.textContent = "💬 Contact via WhatsApp";
+  quickButton.textContent = "💬 WhatsApp";
   quickButton.addEventListener("click", () => {
     openWhatsAppWithMessage("Hello, I have a question about your products.");
   });
