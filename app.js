@@ -1,5 +1,5 @@
 const WHATSAPP_NUMBER = "00962780959008";
-const WARRANTY_OPTIONS = ["No Warranty", "0 Months", "3 Months", "6 Months", "1 Year", "2 Years"];
+const WARRANTY_OPTIONS = ["No Warranty", "6 Months", "1 Year", "2 Years"];
 
 const productContainer = document.getElementById("productContainer");
 const filterButtons = document.querySelectorAll(".filter-btn");
@@ -15,7 +15,7 @@ function getCategoryLabel(category) {
 }
 
 function getMonths(warranty) {
-  if (warranty === "No Warranty" || warranty === "0 Months") {
+  if (warranty === "No Warranty") {
     return 0;
   }
   const value = parseInt(warranty, 10);
