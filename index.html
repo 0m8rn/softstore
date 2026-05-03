@@ -3,11 +3,253 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SoftStore</title>
+  <title>SoftStore — Genuine Licensed Software in Jordan</title>
+  <meta name="description" content="50+ customers trust SoftStore for genuine licensed software. Same-day delivery, remote support, and real savings. Windows, Adobe, AutoCAD, Office & more.">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="mobile.css">
+  <style>
+    /* ── Extra sections styling ─────────────────────────── */
+    .trust-section,
+    .services-section,
+    .why-section {
+      width: min(1100px, 92%);
+      margin: 0 auto 64px;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 700;
+      margin: 0 0 32px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 64px;
+      width: min(1100px, 92%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stat-card {
+      background: linear-gradient(160deg, rgba(0,212,255,0.07), rgba(0,212,255,0.02));
+      border: 1px solid rgba(0,212,255,0.18);
+      border-radius: 16px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: clamp(1.8rem, 6vw, 2.6rem);
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-shadow: 0 0 24px rgba(0,212,255,0.35);
+    }
+
+    .stat-label {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    /* Services grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .service-card {
+      background: linear-gradient(165deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      border-color: rgba(0,212,255,0.35);
+      transform: translateY(-2px);
+    }
+
+    .service-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,212,255,0.08);
+      border-radius: 12px;
+    }
+
+    .service-text h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .service-text p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Why us grid */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .why-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .why-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #9ff0ff, var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #031019;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .why-text h4 {
+      margin: 0 0 4px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .why-text p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* CTA banner */
+    .cta-banner {
+      width: min(1100px, 92%);
+      margin: 0 auto 48px;
+      background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(0,212,255,0.04));
+      border: 1px solid rgba(0,212,255,0.25);
+      border-radius: 20px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .cta-banner h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-banner p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .cta-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #25d366, #19b958);
+      color: #062110;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 13px 24px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 24px rgba(12,94,48,0.35);
+    }
+
+    .cta-wa-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(12,94,48,0.45);
+    }
+
+    /* Products section title */
+    .products-section-header {
+      width: min(1100px, 92%);
+      margin: 0 auto 20px;
+    }
+
+    /* divider */
+    .divider {
+      width: min(1100px, 92%);
+      margin: 0 auto 48px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    }
+
+    @media (min-width: 700px) {
+      .stats-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- ── HEADER ───────────────────────────────────────────── -->
   <header class="site-header">
     <div class="header-inner">
       <div class="logo">SoftStore</div>
@@ -23,20 +265,180 @@
   </header>
 
   <main>
+
+    <!-- ── HERO ─────────────────────────────────────────────── -->
     <section class="hero">
       <div class="hero-content">
-        <h1>Premium Software Licenses</h1>
-        <p>Fast activation, trusted sellers, and pricing built for both individuals and businesses.</p>
+        <h1>Genuine Software Licenses,<br>Delivered Fast in Jordan</h1>
+        <p>50+ customers — students, designers, engineers, and businesses — trust SoftStore for real licensed software at prices that actually make sense.</p>
         <div class="hero-meta">
-          <span>⚡ Instant Delivery</span>
+          <span>✅ 100% Genuine Licenses</span>
+          <span>⚡ Same-Day Delivery</span>
           <span>🛡️ Warranty Included</span>
+          <span>📍 Jordan</span>
         </div>
       </div>
     </section>
 
+    <!-- ── STATS ─────────────────────────────────────────────── -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Customers served across Jordan</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">70%</div>
+        <div class="stat-label">Of orders delivered same day</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Years of experience in IT & software</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Remote support — any time, any place</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── SERVICES ──────────────────────────────────────────── -->
+    <section class="services-section">
+      <div class="section-label">What I Do For You</div>
+      <h2 class="section-title">Setup, Installation & Activation —<br>Your Way</h2>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-icon">🔑</div>
+          <div class="service-text">
+            <h3>License Key Delivery</h3>
+            <p>Get your genuine license key sent directly via WhatsApp — usually within the same day, ready to activate immediately.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">💻</div>
+          <div class="service-text">
+            <h3>Remote Installation</h3>
+            <p>Can't install it yourself? I connect remotely and handle the full setup for you — from any location, at any time.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <div class="service-text">
+            <h3>Physical Visit</h3>
+            <p>Prefer someone on-site? I come to you, install everything, and make sure it's working perfectly before I leave.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">⚙️</div>
+          <div class="service-text">
+            <h3>Full Activation Support</h3>
+            <p>Stuck during activation? I guide you step by step until your software is fully running — no extra charge.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🔧</div>
+          <div class="service-text">
+            <h3>Customized Solutions</h3>
+            <p>Not sure which software or version fits your needs? I help you pick the right tool so you don't pay for what you don't need.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🛡️</div>
+          <div class="service-text">
+            <h3>Warranty & Ongoing Support</h3>
+            <p>Every license comes with a warranty period. If anything stops working, I fix it — that's the deal.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── WHY US ─────────────────────────────────────────────── -->
+    <section class="why-section">
+      <div class="section-label">Why Customers Choose SoftStore</div>
+      <h2 class="section-title">Real Results, Not Just Promises</h2>
+      <div class="why-grid">
+
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div class="why-text">
+            <h4>Fastest Delivery in Jordan</h4>
+            <p>70% of orders are done the same day. The rest within 40 hours max — no waiting weeks for a license.</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div class="why-text">
+            <h4>Always Reachable</h4>
+            <p>Fast response on WhatsApp. No bots, no tickets — a real person who actually solves your problem.</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div class="why-text">
+            <h4>Help From Anywhere</h4>
+            <p>Remote support means I can fix your issue whether you're in Amman, Zarqa, Irbid, or anywhere else.</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div class="why-text">
+            <h4>You Save Real Money</h4>
+            <p>Genuine licenses at prices built for Jordan — not dollar prices copy-pasted from Western markets.</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div class="why-text">
+            <h4>5 Years of IT Experience</h4>
+            <p>Not a reseller who just forwards keys. Real technical background means I understand your setup and fix real problems.</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div class="why-text">
+            <h4>No Cracks, No Risk</h4>
+            <p>Cracked software breaks, gets detected, and costs you more later. Every license here is genuine — zero risk to your work or business.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── PRODUCTS ───────────────────────────────────────────── -->
+    <div class="products-section-header">
+      <div class="section-label">Browse & Order</div>
+      <h2 class="section-title" style="margin-bottom:0;">Pick Your Software</h2>
+    </div>
+
     <section class="products-section">
       <div class="products" id="productContainer"></div>
     </section>
+
+    <!-- ── CTA BANNER ─────────────────────────────────────────── -->
+    <div class="cta-banner">
+      <h2>Not sure what you need?</h2>
+      <p>Tell me your situation and I'll recommend the right software and version for your budget — for free.</p>
+      <a class="cta-wa-btn" href="https://wa.me/00962780959008?text=Hi%2C%20I%20need%20help%20choosing%20the%20right%20software." target="_blank" rel="noopener">
+        💬 Ask on WhatsApp
+      </a>
+    </div>
+
   </main>
 
   <script src="data/pricingRules.js"></script>
