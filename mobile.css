@@ -1,0 +1,288 @@
+/* ============================================================
+   SoftStore — mobile.css
+   Drop this file next to style.css and add ONE line to index.html:
+   <link rel="stylesheet" href="mobile.css">
+   (after the style.css link)
+
+   Fixes:
+   - Oversized product images on Android / iPhone
+   - Filter nav wrapping into 2 rows
+   - Hero text too large on small screens
+   - WhatsApp button overflowing
+   - Checkout modal clipped on short phones
+   - iPhone notch / home-bar safe-area
+   - Tap targets too small (Apple min = 44px)
+   ============================================================ */
+
+/* ── 1. IMAGE FIX — the #1 issue ─────────────────────────────
+   .product-img exists in app.js but has NO CSS rule in style.css.
+   That's why images render at native/full size.                */
+
+.product-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 80px;           /* tight fixed height on mobile */
+  object-fit: contain;    /* never crop, never stretch */
+  object-position: center;
+  margin: 0 auto 10px;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.product-img.loaded {
+  opacity: 1;
+}
+
+/* Image wrapper — prevent it growing the card */
+.product-image-wrap {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-bottom: 10px;
+}
+
+/* ── 2. FILTER NAV — single scrollable row, never wraps ───── */
+.nav {
+  display: flex;
+  flex-wrap: nowrap;          /* kill the wrap */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  gap: 8px;
+  padding-bottom: 4px;        /* room for scrollbar on Android */
+  /* hide scrollbar visually but keep it functional */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-btn {
+  flex-shrink: 0;             /* buttons never squish */
+  min-height: 44px;           /* Apple HIG minimum tap target */
+  white-space: nowrap;
+  padding: 10px 16px;
+  font-size: 0.88rem;
+}
+
+/* ── 3. HEADER — stop it growing tall on mobile ───────────── */
+.header-inner {
+  gap: 10px;
+  padding: 10px 0;
+}
+
+/* ── 4. HERO — tighter on small screens ──────────────────────*/
+.hero {
+  margin: 32px auto 16px;
+}
+
+.hero-content h1 {
+  font-size: clamp(1.55rem, 7vw, 3.7rem); /* was 2.1rem min — too big at 375px */
+  letter-spacing: -0.02em;
+}
+
+.hero-content p {
+  font-size: clamp(0.92rem, 3.5vw, 1.14rem);
+  margin-top: 12px;
+}
+
+.hero-meta {
+  margin-top: 16px;
+  gap: 8px;
+}
+
+.hero-meta span {
+  font-size: 0.82rem;
+  padding: 6px 12px;
+}
+
+/* ── 5. CARD — compact, image-aware ──────────────────────────*/
+.card {
+  padding: 16px;
+}
+
+.product-name {
+  font-size: 1.1rem;
+  max-width: 75%;             /* leave room for badge */
+}
+
+.trust-row span {
+  font-size: 0.7rem;
+  padding: 4px 8px;
+}
+
+.card select {
+  font-size: 0.9rem;
+  padding: 10px 10px;
+  /* iOS prevents zoom on inputs <16px — this keeps it safe */
+  font-size: max(16px, 0.9rem);
+}
+
+.new-price {
+  font-size: 1.28rem;
+}
+
+.buy-btn {
+  min-height: 44px;           /* Apple HIG tap target */
+  font-size: 0.9rem;
+  padding: 11px 10px;
+}
+
+/* ── 6. WHATSAPP FLOATING BUTTON ─────────────────────────────*/
+.quick-whatsapp-btn {
+  right: 14px;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px)); /* iPhone home bar */
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  max-width: calc(100vw - 28px); /* never overflow viewport */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* On very small phones, show icon only */
+@media (max-width: 380px) {
+  .quick-whatsapp-btn {
+    padding: 12px 14px;
+    font-size: 0;               /* hide text */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* keep the emoji visible */
+  .quick-whatsapp-btn::before {
+    content: "💬";
+    font-size: 22px;
+  }
+}
+
+/* ── 7. CHECKOUT MODAL — safe on short phones ─────────────── */
+.checkout-modal-backdrop {
+  padding: 12px;
+  align-items: flex-end;      /* sheet slides up from bottom on mobile */
+}
+
+.checkout-modal {
+  width: 100%;
+  max-height: 92dvh;          /* dvh = dynamic viewport height, handles iOS chrome */
+  overflow-y: auto;
+  border-radius: 20px 20px 12px 12px;
+  padding: 20px 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+}
+
+.checkout-title {
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+}
+
+.checkout-warranty,
+.checkout-confirm {
+  font-size: max(16px, 0.9rem); /* prevent iOS zoom */
+}
+
+.checkout-confirm {
+  min-height: 44px;
+  margin-top: 4px;
+}
+
+/* ── 8. iPhone NOTCH / DYNAMIC ISLAND safe areas ─────────── */
+.site-header {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+body {
+  /* ensure content never hides under home bar */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── 9. PRODUCTS GRID — 1 col on phones, 2 on tablets ──────── */
+@media (max-width: 699px) {
+  .products {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .products-section {
+    margin-bottom: 100px; /* clear the fixed WhatsApp button */
+  }
+}
+
+/* ── 10. TABLET (700-1023px) — keep 2 col, smaller images ─── */
+@media (min-width: 700px) and (max-width: 1023px) {
+  .product-img {
+    height: 100px;
+  }
+
+  .product-image-wrap {
+    height: 100px;
+  }
+
+  .quick-whatsapp-btn {
+    font-size: 0.88rem;
+  }
+}
+
+/* ── 11. DESKTOP — restore full image height ─────────────────
+   On desktop your original style.css runs .product-image with
+   max-height:120px — we match that here so nothing regresses.  */
+@media (min-width: 1024px) {
+  .product-img {
+    height: auto;
+    max-height: 120px;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .product-image-wrap {
+    height: auto;
+    min-height: 80px;
+    max-height: 130px;
+  }
+
+  .quick-whatsapp-btn {
+    font-size: 0.9rem;
+  }
+
+  /* restore modal to center on desktop */
+  .checkout-modal-backdrop {
+    align-items: center;
+    padding: 18px;
+  }
+
+  .checkout-modal {
+    width: min(460px, 100%);
+    border-radius: 16px;
+  }
+}
+
+/* ── 12. WEBKIT / SAFARI SPECIFIC ───────────────────────────*/
+@supports (-webkit-touch-callout: none) {
+  /* This targets iOS Safari only */
+
+  /* Prevent text-size-adjust on orientation change */
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Force antialiasing on Retina */
+  body {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Fix momentum scrolling for the filter nav */
+  .nav {
+    -webkit-overflow-scrolling: touch;
+  }
+}
