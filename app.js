@@ -117,7 +117,7 @@ function createProductCard(product, index) {
       ${createVersionOptions(product)}
     </select>
     <select class="warranty-select" aria-label="Select warranty for ${product.name}">
-      ${createWarrantyOptions("6 Months")}
+      ${createWarrantyOptions("No Warranty")}
     </select>
     <div class="price">
       <div class="old-price"></div>
